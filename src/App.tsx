@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme, Box } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { AuthProvider, useAuth } from './context/AuthContext';
@@ -28,52 +28,31 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
+      <Router basename="/homeward-bownd">
         <AuthProvider>
           <FavoritesProvider>
-            <AppContent />
+            <div className="App">
+              <Header />
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<Welcome />} />
+                <Route path="/search" element={<Search />} />
+                <Route 
+                  path="/favorites" 
+                  element={
+                    <ProtectedRoute>
+                      <Favorites />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route path="/login" element={<Login />} />
+              </Routes>
+            </div>
           </FavoritesProvider>
         </AuthProvider>
       </Router>
     </ThemeProvider>
   );
 }
-
-const AppContent: React.FC = () => {
-  const { user } = useAuth();
-
-  return (
-    <Box className="app-container">
-      <ScrollToTop />
-      <Header />
-      <Box component="main" className="main-content">
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route 
-            path="/login" 
-            element={user ? <Navigate to="/search" replace /> : <Login />} 
-          />
-          <Route
-            path="/search"
-            element={
-              <ProtectedRoute>
-                <Search />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/favorites"
-            element={
-              <ProtectedRoute>
-                <Favorites />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Box>
-    </Box>
-  );
-};
 
 export default App;
