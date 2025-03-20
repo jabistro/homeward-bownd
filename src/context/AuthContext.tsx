@@ -27,7 +27,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const checkAuth = async () => {
             const publicPaths = ['/', '/login'];
             if (!user && !publicPaths.includes(location.pathname)) {
-                navigate('/login', { replace: true });
+                navigate('/', { replace: true });
             }
         };
         checkAuth();

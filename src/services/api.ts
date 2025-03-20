@@ -13,7 +13,8 @@ api.interceptors.response.use(
     (error: AxiosError) => {
         if (error.response?.status === 401) {
             localStorage.removeItem('homeward_bownd_auth');
-            window.location.href = '/login';
+            const baseUrl = process.env.PUBLIC_URL || '';
+            window.location.href = `${window.location.origin}${baseUrl}`;
         }
         return Promise.reject(error);
     }
