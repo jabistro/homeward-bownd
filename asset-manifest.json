@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/homeward-bownd/static/css/main.3828e24e.css",
-    "main.js": "/homeward-bownd/static/js/main.5d576018.js",
-    "index.html": "/homeward-bownd/index.html",
-    "main.3828e24e.css.map": "/homeward-bownd/static/css/main.3828e24e.css.map",
-    "main.5d576018.js.map": "/homeward-bownd/static/js/main.5d576018.js.map"
+    "main.css": "/Homeward-Bownd/static/css/main.3828e24e.css",
+    "main.js": "/Homeward-Bownd/static/js/main.5d576018.js",
+    "index.html": "/Homeward-Bownd/index.html",
+    "main.3828e24e.css.map": "/Homeward-Bownd/static/css/main.3828e24e.css.map",
+    "main.5d576018.js.map": "/Homeward-Bownd/static/js/main.5d576018.js.map"
   },
   "entrypoints": [
     "static/css/main.3828e24e.css",
