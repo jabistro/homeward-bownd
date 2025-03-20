@@ -1,32 +1,37 @@
 .login-container {
+    margin-top: 64px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 16px;
-    margin-top: -96px;
-  }
-  
-  .login-paper {
-    padding: 32px;
+}
+
+.login-paper {
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     max-width: 400px;
-  }
-  
-  .login-form {
+}
+
+.login-form {
     width: 100%;
     margin-top: 16px;
-  }
-  
-  .login-error {
-    margin-top: 16px;
+}
+
+.login-submit {
+    margin-top: 32px !important;
+}
+
+.demo-button {
+    margin-top: 16px !important;
+}
+
+.login-error {
+    margin-top: 8px;
     text-align: center;
-  }
-  
-  .login-submit {
-    margin-top: 24px !important;
-  }
+}
+
+.text-center {
+    text-align: center;
+}

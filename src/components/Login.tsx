@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
+    Container,
     Box,
     Button,
-    Container,
     TextField,
     Typography,
     Paper,
@@ -70,11 +70,23 @@ export const Login: React.FC = () => {
                 localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(existingUsers));
             }
 
-            await login(formData);
+            await login({ email: formData.email, name: formData.name });
             setAuthUser(formData.name, formData.email);
             navigate('/search');
         } catch (err) {
             setError('Invalid credentials. Please try again.');
+        }
+    };
+
+    const handleDemoLogin = async () => {
+        try {
+            const demoEmail = 'demo@homewardbownd.com';
+            const demoName = 'Demo User';
+            await login({ email: demoEmail, name: demoName });
+            setAuthUser(demoName, demoEmail);
+            navigate('/search');
+        } catch (error) {
+            setError('Demo login failed. Please try again.');
         }
     };
 
@@ -136,9 +148,17 @@ export const Login: React.FC = () => {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            className="login-submit mt-medium"
+                            className="login-submit"
                         >
                             Sign In
+                        </Button>
+                        <Button
+                            fullWidth
+                            variant="outlined"
+                            onClick={handleDemoLogin}
+                            className="demo-button"
+                        >
+                            DEMO USER
                         </Button>
                     </Box>
                 </Paper>
