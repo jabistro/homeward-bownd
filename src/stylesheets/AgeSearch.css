@@ -1,0 +1,15 @@
+.age-search-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 24px;
+}
+
+.age-search-content .MuiFormControl-root {
+    margin-top: 8px;
+}
+
+.age-search-content .MuiInputLabel-root {
+    background-color: white;
+    padding: 0 4px;
+} 

@@ -1,0 +1,22 @@
+.search-container {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  
+  .search-header {
+    margin-bottom: 24px;
+  }
+  
+  .search-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+  }
+  
+  .search-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+  }
+  

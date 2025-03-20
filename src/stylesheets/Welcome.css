@@ -1,0 +1,13 @@
+.welcome-container {
+    padding: 48px 0;
+    text-align: center;
+  }
+  
+  .welcome-paper {
+    padding: 24px;
+    margin: 32px 0;
+  }
+  
+  .welcome-button {
+    min-width: 200px;
+  }

@@ -1,0 +1,35 @@
+.favorites-container {
+    padding-bottom: 24px;
+}
+
+.favorites-header {
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.favorites-header h1 {
+    margin-bottom: 24px;
+}
+
+.favorites-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.favorites-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    text-align: center;
+}
+
+.favorites-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}

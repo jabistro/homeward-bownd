@@ -1,0 +1,32 @@
+.location-search-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 24px;
+  }
+  
+  .location-search-content .MuiFormControl-root:first-child {
+    margin-top: 8px;
+  }
+  
+  .location-search-content .MuiInputLabel-root {
+    background-color: white;
+    padding: 0 4px;
+  }
+  
+  .city-chips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  .location-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  
+  .city-select-menu {
+    max-height: 300px;
+  }

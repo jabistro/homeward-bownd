@@ -1,0 +1,365 @@
+/* Utility Classes */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.gap-small {
+  gap: 8px;
+}
+
+.gap-medium {
+  gap: 16px;
+}
+
+.gap-large {
+  gap: 24px;
+}
+
+.mb-small {
+  margin-bottom: 8px;
+}
+
+.mb-medium {
+  margin-bottom: 16px;
+}
+
+.mb-large {
+  margin-bottom: 24px;
+}
+
+.mt-small {
+  margin-top: 8px;
+}
+
+.mt-medium {
+  margin-top: 16px;
+}
+
+.mt-large {
+  margin-top: 24px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.large-text {
+  font-size: 1.25rem;
+}
+
+.medium-text {
+  font-size: 1rem;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+/* Card Image Styles */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  padding-top: 75%;
+}
+
+.image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-container:hover img {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.image-container:hover .image-overlay {
+  opacity: 1;
+}
+
+.image-overlay-text {
+  color: white;
+  font-size: 1.1rem;
+}
+
+.fullsize-image {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+.fullsize-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.fullsize-image-container .close-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  z-index: 9999;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.fullsize-image-container .close-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.transparent-dialog {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  position: relative;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+.transparent-dialog .MuiDialog-paper {
+  overflow: visible !important;
+  position: relative !important;
+}
+
+.transparent-dialog .MuiDialogContent-root {
+  padding: 0 !important;
+  position: relative !important;
+}
+
+/* Dialog Styles */
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+.match-dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding-top: 32px;
+}
+
+.match-dialog-image {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.match-dialog-card {
+  width: 100%;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.match-dialog-card .MuiCardMedia-root {
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  background-color: #f5f5f5;
+}
+
+.match-dialog-card .MuiCardMedia-root img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.match-dialog-card .MuiCardContent-root {
+  padding: 24px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.match-dialog-card .MuiTypography-h6 {
+  color: #2196f3;
+  margin-bottom: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.match-dialog-card .MuiTypography-body1 {
+  color: #666;
+  margin-bottom: 8px;
+  text-align: center;
+  width: 100%;
+}
+
+.match-dialog-card .MuiTypography-body1:last-child {
+  margin-bottom: 0;
+}
+
+.match-dialog-title {
+  background-color: #2196f3;
+  color: white;
+  padding: 16px 24px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.match-dialog-actions {
+  padding: 16px 24px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #e0e0e0;
+}
+
+.object-contain {
+  object-fit: contain;
+}
+
+/* Sort Controls and Action Buttons */
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.sort-controls .MuiFormControl-root {
+  flex: 1;
+  min-width: 120px;
+}
+
+.sort-controls .MuiSelect-select {
+  text-align: left;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-buttons button {
+  white-space: nowrap;
+  padding: 6px 16px;
+  width: auto;
+  min-width: 120px;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .favorites-actions {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .action-buttons button {
+    width: 100%;
+    padding: 8px 16px;
+  }
+
+  .nav-links-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sort-controls {
+    width: 100%;
+  }
+
+  .sort-controls .MuiFormControl-root {
+    width: 100%;
+  }
+
+  .sort-controls .MuiIconButton-root {
+    margin-left: 8px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .favorites-actions {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .action-buttons {
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  .action-buttons button {
+    width: auto;
+    min-width: fit-content;
+  }
+}
+
+.search-header .flex-row .flex-row {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.search-header .flex-row .flex-row button {
+  min-width: 140px;
+  white-space: nowrap;
+  height: 36px;
+} 
