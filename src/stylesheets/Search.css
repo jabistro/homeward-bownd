@@ -1,22 +1,223 @@
 .search-container {
-    padding-top: 24px;
+    padding-top: 48px;
     padding-bottom: 24px;
-  }
-  
-  .search-header {
+}
+
+.search-header {
     margin-bottom: 24px;
-  }
-  
-  .search-loading {
+    padding-top: 16px;
+}
+
+.search-controls {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.search-controls-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.search-loading {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 400px;
-  }
-  
-  .search-pagination {
+}
+
+.search-pagination {
     display: flex;
     justify-content: center;
     margin-top: 24px;
-  }
+}
+
+.dog-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dog-card-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+.dog-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dog-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+}
+
+.dog-card-info .MuiTypography-root {
+    text-align: left;
+}
+
+.dog-card-actions {
+    display: none;
+}
+
+.image-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.image-container:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-overlay-text {
+    color: white;
+    text-align: center;
+}
+
+.sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    width: auto;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+    width: auto;
+}
+
+.location-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mt-medium {
+    margin-top: 16px;
+    text-align: left;
+}
+
+.search-header h1 {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.search-title {
+    text-align: center;
+    margin-bottom: 24px !important;
+}
+
+.generate-match-button {
+    width: auto;
+    margin: 0;
+    border-radius: 4px;
+    display: block;
+    flex: none;
+}
+
+@media (max-width: 900px) {
+    .search-controls {
+        flex-wrap: wrap;
+    }
+    
+    .search-container {
+        padding-top: 72px;
+    }
+    
+    .search-header {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-controls-left {
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .search-controls-left .MuiFormControl-root {
+        width: 100%;
+    }
+    
+    .sort-controls {
+        width: 100%;
+    }
+    
+    .filter-buttons {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+    }
+    
+    .filter-buttons button {
+        width: calc(50% - 4px);
+    }
+    
+    .generate-match-button {
+        width: 100%;
+        margin: 8px 0 0;
+        border-radius: 4px;
+        display: block;
+        flex: none;
+    }
+    
+    .search-container {
+        padding-top: 36px;
+    }
+    
+    .search-header {
+        padding-top: 0;
+    }
+}
+
+@media (min-width: 900px) {
+    .search-container {
+        padding-top: 16px;
+        padding-bottom: 32px;
+    }
+}
+
+.MuiSelect-select {
+    text-align: left !important;
+}
+
+.MuiMenuItem-root {
+    text-align: left !important;
+    justify-content: flex-start !important;
+}
   

@@ -28,6 +28,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { getBreeds, searchDogs, getDogs, getMatch, getLocations, searchLocations } from '../services/api';
 import { Dog, Location } from '../types';
 import { useFavorites } from '../context/FavoritesContext';
+import { useAuth } from '../context/AuthContext';
 import '../stylesheets/Search.css';
 import '../stylesheets/UtilityStyles.css';
 import { LocationSearch } from './LocationSearch';
@@ -45,6 +46,7 @@ interface AgeFilter {
 }
 
 export const Search: React.FC = () => {
+    const { user } = useAuth();
     const [breeds, setBreeds] = useState<string[]>([]);
     const [selectedBreed, setSelectedBreed] = useState<string>('');
     const [dogs, setDogs] = useState<Dog[]>([]);
@@ -116,6 +118,15 @@ export const Search: React.FC = () => {
     }, [ageFilter]);
 
     useEffect(() => {
+        if (!user) {
+            setLocationFilter({ state: '', cities: [] });
+            setAgeFilter({ minAge: '', maxAge: '' });
+            localStorage.removeItem('locationFilter');
+            localStorage.removeItem('ageFilter');
+        }
+    }, [user]);
+
+    useEffect(() => {
         if (!filtersLoaded) return;
 
         const fetchDogs = async () => {
@@ -144,10 +155,14 @@ export const Search: React.FC = () => {
                 setDogs(dogsList);
                 setTotalPages(Math.ceil(searchResult.total / 20));
 
-                const uniqueZipCodes = Array.from(new Set(dogsList.map(dog => dog.zip_code)));
+                const uniqueZipCodes = Array.from(new Set(dogsList
+                    .filter(dog => dog && dog.zip_code)
+                    .map(dog => dog.zip_code)));
                 const locations = await getLocations(uniqueZipCodes);
                 const locationMapData = locations.reduce((acc, location) => {
-                    acc[location.zip_code] = location;
+                    if (location && location.zip_code) {
+                        acc[location.zip_code] = location;
+                    }
                     return acc;
                 }, {} as Record<string, Location>);
                 setLocationMap(locationMapData);
@@ -196,7 +211,16 @@ export const Search: React.FC = () => {
         try {
             const matchResult = await getMatch(favorites.map((f) => f.id));
             const matchedDogData = await getDogs([matchResult.match]);
-            setMatchedDog(matchedDogData[0]);
+            const matchedDog = matchedDogData[0];
+            
+            const locations = await getLocations([matchedDog.zip_code]);
+            const locationMapData = locations.reduce((acc, location) => {
+                acc[location.zip_code] = location;
+                return acc;
+            }, {} as Record<string, Location>);
+            setLocationMap(prev => ({ ...prev, ...locationMapData }));
+            
+            setMatchedDog(matchedDog);
             setShowMatchDialog(true);
         } catch (error) {
             console.error('Error generating match:', error);
@@ -251,22 +275,11 @@ export const Search: React.FC = () => {
     return (
         <Container className="search-container" maxWidth="lg">
             <Box className="search-header">
-                <Box className="flex-row space-between mb-large">
-                    <Typography variant="h4" component="h1">
-                        Find Your Perfect Dog
-                    </Typography>
-                    <Box className="flex-row gap-small">
-                        <Button
-                            variant="contained"
-                            onClick={handleGenerateMatch}
-                            disabled={favorites.length === 0}
-                        >
-                            Generate Match
-                        </Button>
-                    </Box>
-                </Box>
-                <Grid container spacing={2} alignItems="center">
-                    <Grid item xs={12} sm={5}>
+                <Typography variant="h4" component="h1" className="search-title">
+                    Find Your Perfect Dog
+                </Typography>
+                <Box className="search-controls">
+                    <Box className="search-controls-left">
                         <FormControl sx={{ minWidth: 200 }}>
                             <InputLabel 
                                 id="breed-select-label"
@@ -285,7 +298,9 @@ export const Search: React.FC = () => {
                                     name: "breed-select"
                                 }}
                             >
-                                <MenuItem value="">All Breeds</MenuItem>
+                                <MenuItem value="">
+                                    <em>All Breeds</em>
+                                </MenuItem>
                                 {breeds.map((breed) => (
                                     <MenuItem key={breed} value={breed}>
                                         {breed}
@@ -293,10 +308,9 @@ export const Search: React.FC = () => {
                                 ))}
                             </Select>
                         </FormControl>
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
+
                         <Box className="sort-controls">
-                            <FormControl size="small" sx={{ minWidth: 120 }}>
+                            <FormControl size="small" sx={{ width: 120 }}>
                                 <InputLabel 
                                     id="sort-field-label"
                                     htmlFor="sort-field-input"
@@ -327,14 +341,12 @@ export const Search: React.FC = () => {
                                 {sortOrder === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
                             </IconButton>
                         </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={3}>
-                        <Box className="flex-row gap-small">
+
+                        <Box className="filter-buttons">
                             <Button
                                 variant="outlined"
+                                color={locationFilter.state ? "primary" : "inherit"}
                                 onClick={() => setShowLocationSearch(true)}
-                                fullWidth
-                                color={locationFilter.state ? 'primary' : 'inherit'}
                                 id="location-filter-button"
                                 aria-label="Open location filter"
                                 aria-haspopup="dialog"
@@ -344,9 +356,8 @@ export const Search: React.FC = () => {
                             </Button>
                             <Button
                                 variant="outlined"
+                                color={ageFilter.minAge !== '' || ageFilter.maxAge !== '' ? "primary" : "inherit"}
                                 onClick={() => setShowAgeSearch(true)}
-                                fullWidth
-                                color={ageFilter.minAge || ageFilter.maxAge ? 'primary' : 'inherit'}
                                 id="age-filter-button"
                                 aria-label="Open age filter"
                                 aria-haspopup="dialog"
@@ -355,8 +366,17 @@ export const Search: React.FC = () => {
                                 {getAgeFilterLabel()}
                             </Button>
                         </Box>
-                    </Grid>
-                </Grid>
+                    </Box>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleGenerateMatch}
+                        disabled={favorites.length === 0}
+                        className="generate-match-button"
+                    >
+                        GENERATE MATCH
+                    </Button>
+                </Box>
 
                 {(locationFilter.state || ageFilter.minAge || ageFilter.maxAge) && (
                     <Box className="mt-medium">
@@ -450,7 +470,7 @@ export const Search: React.FC = () => {
                 <Grid container spacing={3}>
                     {dogs.map((dog) => (
                         <Grid item key={dog.id} xs={12} sm={6} md={4}>
-                            <Card>
+                            <Card className="dog-card">
                                 <Box className="image-container">
                                     <CardMedia
                                         component="img"
@@ -466,9 +486,9 @@ export const Search: React.FC = () => {
                                         </Typography>
                                     </Box>
                                 </Box>
-                                <CardContent>
-                                    <Box className="flex-row space-between align-center">
-                                        <Typography gutterBottom variant="h6" component="div" id={`dog-name-${dog.id}`}>
+                                <CardContent className="dog-card-content">
+                                    <Box className="dog-card-header">
+                                        <Typography variant="h6" component="div" id={`dog-name-${dog.id}`}>
                                             {dog.name}
                                         </Typography>
                                         <IconButton
@@ -484,15 +504,17 @@ export const Search: React.FC = () => {
                                             )}
                                         </IconButton>
                                     </Box>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Breed: {dog.breed}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Age: {dog.age} years
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Location: {getLocationString(dog.zip_code)}
-                                    </Typography>
+                                    <Box className="dog-card-info">
+                                        <Typography variant="body2" color="text.secondary">
+                                            Breed: {dog.breed}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                            Age: {dog.age} years
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                            Location: {getLocationString(dog.zip_code)}
+                                        </Typography>
+                                    </Box>
                                 </CardContent>
                             </Card>
                         </Grid>
@@ -506,6 +528,7 @@ export const Search: React.FC = () => {
                     page={page}
                     onChange={handlePageChange}
                     color="primary"
+                    size="large"
                 />
             </Box>
 

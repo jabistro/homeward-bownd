@@ -223,8 +223,8 @@ export const Favorites: React.FC = () => {
                                     </Typography>
                                 </Box>
                             </Box>
-                            <CardContent>
-                                <Box className="flex-row space-between align-center">
+                            <CardContent className="dog-card-content">
+                                <Box className="dog-card-header">
                                     <Typography gutterBottom variant="h6" component="div">
                                         {dog.name}
                                     </Typography>
@@ -235,15 +235,17 @@ export const Favorites: React.FC = () => {
                                         <FavoriteIcon />
                                     </IconButton>
                                 </Box>
-                                <Typography variant="body2" color="text.secondary">
-                                    Breed: {dog.breed}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Age: {dog.age} years
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Location: {getLocationString(dog.zip_code)}
-                                </Typography>
+                                <Box className="dog-card-info">
+                                    <Typography variant="body2" color="text.secondary">
+                                        Breed: {dog.breed}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Age: {dog.age} years
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Location: {getLocationString(dog.zip_code)}
+                                    </Typography>
+                                </Box>
                             </CardContent>
                         </Card>
                     </Grid>

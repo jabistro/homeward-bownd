@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -44,13 +47,22 @@
 }
 
 .main-content {
-  flex-grow: 1;
-  padding-top: 120px;
+  flex: 1;
+  padding-top: 80px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
-@media (min-width: 900px) {
+.main-header {
+  z-index: 1200;
+}
+
+@media (max-width: 600px) {
   .main-content {
-    padding-top: 64px;
+    padding-top: 120px;
   }
 }
 

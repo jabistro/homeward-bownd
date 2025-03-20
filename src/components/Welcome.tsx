@@ -89,14 +89,16 @@ export const Welcome: React.FC = () => {
 
                 <Box className="mt-medium">
                     {user ? (
-                        <Button
-                            variant="contained"
-                            size="large"
-                            onClick={() => navigate('/search')}
-                            className="welcome-button"
-                        >
-                            Start Searching
-                        </Button>
+                        <Box className="flex-center">
+                            <Button
+                                variant="contained"
+                                size="large"
+                                onClick={() => navigate('/search')}
+                                className="welcome-button"
+                            >
+                                Start Searching
+                            </Button>
+                        </Box>
                     ) : (
                         <Box className="flex-column gap-medium text-center">
                             <Typography variant="body1" color="text.secondary">

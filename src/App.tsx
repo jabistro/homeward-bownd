@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme, Box } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 import { FavoritesProvider } from './context/FavoritesContext';
 import { Header } from './components/Header';
 import { Welcome } from './components/Welcome';
@@ -25,33 +25,37 @@ const theme = createTheme({
 });
 
 function App() {
+  const basename = process.env.NODE_ENV === 'production' ? '/homeward-bownd' : '/';
+
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router basename="/homeward-bownd">
+    <Router basename={basename}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
         <AuthProvider>
           <FavoritesProvider>
             <div className="App">
               <Header />
               <ScrollToTop />
-              <Routes>
-                <Route path="/" element={<Welcome />} />
-                <Route path="/search" element={<Search />} />
-                <Route 
-                  path="/favorites" 
-                  element={
-                    <ProtectedRoute>
-                      <Favorites />
-                    </ProtectedRoute>
-                  } 
-                />
-                <Route path="/login" element={<Login />} />
-              </Routes>
+              <main className="main-content">
+                <Routes>
+                  <Route path="/" element={<Welcome />} />
+                  <Route path="/search" element={<Search />} />
+                  <Route 
+                    path="/favorites" 
+                    element={
+                      <ProtectedRoute>
+                        <Favorites />
+                      </ProtectedRoute>
+                    } 
+                  />
+                  <Route path="/login" element={<Login />} />
+                </Routes>
+              </main>
             </div>
           </FavoritesProvider>
         </AuthProvider>
-      </Router>
-    </ThemeProvider>
+      </ThemeProvider>
+    </Router>
   );
 }
 
