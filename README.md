@@ -2,7 +2,7 @@
 
 A modern web application for searching and finding your perfect dog companion. Built with React and Material-UI, this application allows users to search through a database of dogs, filter by various criteria, and save their favorites. All in order to find their perfect match!
 
-🌐 **Live Site**: [Homeward Bownd](http://johnallanhinds.com/Homeward-Bownd/)
+🌐 **Live Site**: <a href="http://johnallanhinds.com/Homeward-Bownd/" target="_blank">Homeward Bownd</a>
 
 ## Screenshots
 
