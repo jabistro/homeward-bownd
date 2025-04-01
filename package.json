@@ -1,7 +1,7 @@
 {
   "name": "homeward-bownd",
   "version": "0.1.0",
-  "homepage": "https://jabistro.github.io/Homeward-Bownd",
+  "homepage": "https://jabistro.github.io/homeward-bownd",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.14.0",
